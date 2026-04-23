@@ -1,28 +1,24 @@
-// export const Person = ({ person }) => ();
 export const Person = ({ person }) => {
-  let married = '';
+  const { name, age, sex, isMarried, partnerName } = person;
 
-  if (person.isMarried === true) {
-    if (person.sex === 'f') {
-      married = (
-        <p className="Person__partner">{person.partnerName} is my husband</p>
-      );
-    } else {
-      married = (
-        <p className="Person__partner">{person.partnerName} is my wife</p>
-      );
-    }
+  let partnerText;
+
+  if (isMarried) {
+    partnerText =
+      sex === 'm'
+        ? `${partnerName} is my wife`
+        : `${partnerName} is my husband`;
   } else {
-    married = <p className="Person__partner">I am not married</p>;
+    partnerText = 'I am not married';
   }
 
   return (
     <section className="Person">
-      <h2 className="Person__name">My name is {person.name}</h2>
-      {person.age !== undefined && (
-        <p className="Person__age">I am {person.age}</p>
-      )}
-      {married}
+      <h2 className="Person__name">My name is {name}</h2>
+
+      {age && <p className="Person__age">I am {age}</p>}
+
+      <p className="Person__partner">{partnerText}</p>
     </section>
   );
 };
